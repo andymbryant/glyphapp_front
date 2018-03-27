@@ -4,7 +4,8 @@ import axios from 'axios';
 import "./App.css";
 
 const sendData = data => {
-    axios.post('http://127.0.0.1:3001/save', {
+    axios.post('https://pacific-temple-84076.herokuapp.com/save', {
+    // axios.post('http://127.0.0.1:3001/save', {
         data: data
         })
         .then(function (response) {
