@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/glyphstyle_ssiege.css" />
+</head>
+<body>
+    <div class="whole">
+        <div id="root"></div>
+        <div class="mymargin">
+
+            Select the data subset to visualize (quarter)
+            <span id="level"></span> Increase/decrease graph opacity
+
+            <input type="button" id="incrementOpacity" value="++" onclick="incrementOpacity()" />
+            <input type="button" id="decrementOpacity" value="--" onclick="decrementOpacity()" /> Freeze graph layout <input type="button" id="freezeLayout" value="Freeze/Unfreeze" onclick="freezeLayout()" /> Fix all nodes' positions <input type="button" id="fixLayout" value="Fix/Unfix" onclick="fixLayout()" />
+        </div>
+
+        <div class="left1" id="state-graph-div">
+            <div class="mymargin">
+                <b>Graph Controls - </b> Increase/decrease graph size
+                <input type="button" value="++" onclick="incrementGraph(0)" />
+                <input type="button" value="--" onclick="decrementGraph(0)" />
+                <br/> Enter user IDs (comma-separated) <input type="text" id="userID">
+                <input type="button" id="highlightUserID" value="Highlight" onclick="highlightUserID()" />
+
+            Group Highlight:
+            <input type="button" value="team2" onclick="highlightGroup(1)" />
+            <input type="button" value="team3" onclick="highlightGroup(2)" />
+            <input type="button" value="All" onclick="highlightGroup(0)" />
+
+                <br/> Enter K
+                <input type="text" id="number-highlight">
+                <input type="button" id="toggleFrequentTrajectories" value="Highlight K most frequent" onclick="toggleHighlightFreqTrajectories()" />
+                <input type="button" id="toggleKthTrajectories" value="Highlight K-th most frequent" onclick="toggleKthTrajectories()" />
+                <input type="button" id="clearHighlight" value="Clear all highlights" onclick="clearHighlight()" /><br/>
+                <hr/>
+
+                <b>
+                    Data info
+
+            </b> -
+                <label id="level-id"></label>.
+                Number of state nodes: <b><label id="num-statenodes"></label></b> , Number of player: <b><label id="num-players"></label></b> <br/>
+            </div>
+            <div id="state-graph-svg"></div>
+            <div class="mymargin">
+                <b>State Node Info</b> (updated when node selected): <label id="statenode-info"></label><br/>
+                <b>Stats: </b><span style="color:red"><label id="statenode-stats"></label></span>
+                <br/> Player IDs visiting this node (<label id="num-players-state"></label> players): <label id="players-state"></label><br/>
+                <b>Action Link Info</b> (updated when link selected): <span style="color:purple"><label id="statelink-info"></label></span><br/>
+                Player IDs traversing this link (<label id="num-players-statelink"></label> players): <label id="players-statelink"></label><br/>
+            </div>
+        </div>
+
+        <div class="right1" id="behavior-graph-div">
+            <div class="mymargin">
+
+                <b>Graph Controls - </b> Increase/decrease graph size
+                <input type="button" value="++" onclick="incrementGraph(1)" />
+                <input type="button" value="--" onclick="decrementGraph(1)" />
+                Toggle showing links <input type="button" id="toggleShowLinks" value="Show/Hide" onclick="toggleShowLinks()" />
+                <br/> Enter sequence index to highlight (comma separated)
+                <input type="text" id="playtrace-index">
+                <input type="button" id="highlightNodeID" value="Highlight" onclick="highlightNodeID()" />
+
+                <input type="button" id="highlightNodeID_first" value="first" onclick="highlightNodeID_index(0)" />
+                <input type="button" id="highlightNodeID_last" value="last" onclick="highlightNodeID_index(-1)" />
+                <input type="button" id="highlightNodeID_reverse" value="reverse" onclick="highlightNodeID(true)" />
+
+                <input type="button" value="Clear all highlights" onclick="clearHighlight()" />
+                <br/> Enter sequence index to show info
+                <input type="text" id="playtrace-show-info">
+                <input type="button" value="Show" onclick="showInfoNodeID()" />
+
+                <hr/>
+                <b>Data Info</b> - Total number of sequences (nodes): <b><label id="num-nodes"></label></b>
+
+            </div>
+            <div id="behavior-graph-svg"></div>
+            <div class="mymargin">
+                <b>Sequence Node Info</b> (updated when node selected) - ID = <label id="selected-node-index"></label> <br/>
+                Player IDs having this pattern (<label id="num-players-sequence"></label> players): <label id="players-sequence"></label><br/>
+                Action sequence: <span style="color:purple"><b><label id="actionseq-info"></label></b></span><br/><br/>
+                Complete sequence (<label id="num-states-in-trajectory"></label> states): <span style="color:red"><b><label id="infobox"></label></b></span><br/>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="libs/d3.min.js"></script>
+    <script src="libs/underscore-min.js"></script>
+    <script src='index.js'></script>
+
+</body>
